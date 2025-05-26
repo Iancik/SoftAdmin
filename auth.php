@@ -1,9 +1,9 @@
 <?php
 session_start();
-require_once 'db.php';
+require_once 'config.php';
 
 function authenticate_user($username, $password) {
-    $pdo = get_db_connection('site_content'); // Presupunem ca userii sunt in aceasta baza
+    global $pdo;
     $stmt = $pdo->prepare("SELECT * FROM users WHERE username = ? LIMIT 1");
     $stmt->execute([$username]);
     $user = $stmt->fetch(PDO::FETCH_ASSOC);

@@ -67,18 +67,18 @@ $menu = [
 
 // Detect page and action
 $page = $_GET['page'] ?? 'dashboard';
-$action = $_GET['action'] ?? '';
+$action = is_string($_GET['action'] ?? '') ? ($_GET['action'] ?? '') : '';
 
-// Titlu dinamic
-function get_page_title($action, $actions, $norme_md) {
-    foreach ($actions as $a) if ($action === $a['action']) return $a['label'];
-    foreach ($norme_md as $n) {
-        if (!empty($n['action']) && $action === $n['action']) return $n['label'];
-        if (!empty($n['children'])) foreach ($n['children'] as $c) if ($action === $c['action']) return $c['label'];
-    }
-    return 'Dashboard';
-}
-$page_title = get_page_title($action, $actions, $norme_md);
+// Liste acțiuni pentru devize și norme
+$devize_actions = [
+    'cursuri', 'noutati', 'preturi', 'asistenta', 'contacte', 'dashboard', 'setari', 'utilizatori'
+];
+$norme_actions = [
+    'editare_norme', 'editare_text_norma', 'editare_resurse', 'editare_consum', 'adaugare_norme', 'stergere_norme',
+    'editare_preturi', 'editare_preturi_material', 'editare_preturi_manopera', 'editare_preturi_utilaj',
+    'furnizori', 'furnizori_adaugare', 'furnizori_stergere',
+    'recapitulatii', 'curs_moneda', 'adauga_specificatii'
+];
 ?>
 <!DOCTYPE html>
 <html lang="ro">
@@ -152,8 +152,8 @@ $page_title = get_page_title($action, $actions, $norme_md);
                             <span><?= $item['label'] ?></span>
                         </a>
                         <div id="actions-list" class="actions-list" style="display:none;">
-                            <?php foreach ($actions as $action): ?>
-                                <a href="?action=<?= $action['action'] ?>" class="action-link"><i class="bi <?= $action['icon'] ?>"></i><?= $action['label'] ?></a>
+                            <?php foreach ($actions as $devize_action): ?>
+                                <a href="?action=<?= $devize_action['action'] ?>" class="action-link"><i class="bi <?= $devize_action['icon'] ?>"></i><?= $devize_action['label'] ?></a>
                             <?php endforeach; ?>
                         </div>
                     <?php elseif (!empty($item['norme'])): ?>
@@ -195,19 +195,24 @@ $page_title = get_page_title($action, $actions, $norme_md);
             </div>
         </div>
         <div class="main-content-wp">
-            <div class="d-flex align-items-center mb-3">
-                <div class="page-title flex-grow-1"><?= htmlspecialchars($page_title) ?></div>
-            </div>
             <?php
-            // Includ pagina doar dacă există action, altfel dashboard
+            // Includ pagina din devize sau norme, sau dashboard
             if ($action && is_string($action) && preg_match('/^[a-z0-9_]+$/i', $action)) {
-                $file = "pages/{$action}.php";
-                if (file_exists($file)) {
+                if (in_array($action, $devize_actions)) {
+                    $file = "pages/devize/{$action}.php";
+                } elseif (in_array($action, $norme_actions)) {
+                    $file = "pages/norme/{$action}.php";
+                } else {
+                    $file = null;
+                }
+                if ($file && file_exists($file)) {
                     include $file;
                 } else {
                     echo "<div class='alert alert-warning'>Pagina nu există încă.</div>";
                 }
-            } 
+            } else {
+                include 'pages/devize/dashboard.php';
+            }
             ?>
         </div>
     </div>
