@@ -1,0 +1,1 @@
+<h2>Cursul monedei</h2> 

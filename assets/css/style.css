@@ -1,0 +1,27 @@
+.sidebar {
+    width: 220px;
+    min-height: 100vh;
+}
+.card-home { background: #7b7bfa; }
+.card-calendar { background: #ffc857; }
+.card-files { background: #4da3ff; }
+.card-companies { background: #e17be1; }
+.card {
+    border: none;
+    border-radius: 18px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    transition: transform 0.1s;
+}
+.card:hover {
+    transform: translateY(-4px) scale(1.03);
+}
+
+/* Stiluri dashboard minimalist */
+.sidebar-custom { background: #ddd; min-height: 100vh; width: 340px; }
+.sidebar-custom .db-select { background: #999; color: #fff; font-size: 1.5rem; font-weight: 500; border: none; width: 90%; margin: 24px auto 32px auto; display: block; padding: 8px 0; text-align: center; border-radius: 2px; }
+.sidebar-custom .menu-line { border-bottom: 1px solid #222; margin: 32px 24px; }
+.sidebar-custom .btn-setari { background: #999; color: #fff; font-size: 1.5rem; width: 80%; margin: 32px auto 0 auto; display: block; border: none; border-radius: 2px; padding: 8px 0; }
+.main-content-custom { background: #fff; min-height: 100vh; position: relative; }
+.main-content-custom .action-title { text-align: center; font-size: 2rem; margin-top: 32px; margin-bottom: 24px; }
+.main-content-custom .action-box { background: #ddd; width: 80%; aspect-ratio: 1/1; margin: 0 auto; border: 1px solid #888; position: relative; }
+.main-content-custom .top-right-box { position: absolute; right: 40px; top: 24px; width: 200px; height: 32px; background: #ddd; }

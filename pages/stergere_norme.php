@@ -1,0 +1,1 @@
+<h2>Ștergere norme</h2> 
