@@ -28,8 +28,8 @@ $norme_md = [
         'icon' => 'bi-pencil',
         'children' => [
             ['label' => 'Editare text normă', 'icon' => 'bi-fonts', 'action' => 'editare_text_norma'],
-            ['label' => 'Editare resurse', 'icon' => 'bi-tools', 'action' => 'editare_resurse'],
-            ['label' => 'Editare consum', 'icon' => 'bi-graph-up', 'action' => 'editare_consum'],
+            ['label' => 'Editare resurse', 'icon' => 'bi-tools', 'action' => 'editare_res'],
+           
         ]
     ],
     ['label' => 'Adăugare norme', 'icon' => 'bi-plus-circle', 'action' => 'adaugare_norme'],
@@ -74,7 +74,7 @@ $devize_actions = [
     'cursuri', 'noutati', 'preturi', 'asistenta', 'contacte', 'dashboard', 'setari', 'utilizatori'
 ];
 $norme_actions = [
-    'editare_norme', 'editare_text_norma', 'editare_resurse', 'editare_consum', 'adaugare_norme', 'stergere_norme',
+    'editare_norme', 'editare_text_norma', 'editare_res', 'adaugare_norme', 'stergere_norme',
     'editare_preturi', 'editare_preturi_material', 'editare_preturi_manopera', 'editare_preturi_utilaj',
     'furnizori', 'furnizori_adaugare', 'furnizori_stergere',
     'recapitulatii', 'curs_moneda', 'adauga_specificatii'
