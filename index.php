@@ -1,4 +1,5 @@
 <?php
+error_log('--- START index.php ---');
 // require_once 'auth.php';
 // require_login();
 
@@ -68,10 +69,11 @@ $menu = [
 // Detect page and action
 $page = $_GET['page'] ?? 'dashboard';
 $action = is_string($_GET['action'] ?? '') ? ($_GET['action'] ?? '') : '';
+error_log('Detectare acțiune: ' . $action);
 
 // Liste acțiuni pentru devize și norme
 $devize_actions = [
-    'cursuri', 'noutati', 'preturi', 'asistenta', 'contacte', 'dashboard', 'setari', 'utilizatori'
+    'cursuri', 'curs_form', 'noutati', 'preturi', 'asistenta', 'contacte', 'dashboard', 'setari', 'utilizatori'
 ];
 $norme_actions = [
     'editare_norme', 'editare_text_norma', 'editare_resurse', 'editare_consum', 'adaugare_norme', 'stergere_norme',
@@ -206,8 +208,10 @@ $norme_actions = [
                     $file = null;
                 }
                 if ($file && file_exists($file)) {
+                    error_log('Include fișier: ' . $file);
                     include $file;
                 } else {
+                    error_log('Fișierul nu există: ' . $file);
                     echo "<div class='alert alert-warning'>Pagina nu există încă.</div>";
                 }
             } else {
