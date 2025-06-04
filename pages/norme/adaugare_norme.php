@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
 require_once __DIR__ . '/../../config/database.php';
 
 // Get the next variant code
@@ -17,6 +18,9 @@ try {
     error_log("Database error: " . $e->getMessage());
     $nextCod = 1; // Default to 1 if there's an error
 }
+=======
+require_once 'config.php';
+>>>>>>> 6dbdec9cd26658aa17bf66070ebef1653f2dbaa9
 ?>
 <!DOCTYPE html>
 <html lang="ro">
@@ -35,7 +39,11 @@ try {
                 <div class="col-md-2">
                     <div class="mb-3">
                         <label for="codVarianta" class="form-label">Cod Variantă</label>
+<<<<<<< HEAD
                         <input type="text" class="form-control" id="codVarianta" name="codVarianta" value="<?php echo $nextCod; ?>" readonly>
+=======
+                        <input type="text" class="form-control" id="codVarianta" name="codVarianta" required>
+>>>>>>> 6dbdec9cd26658aa17bf66070ebef1653f2dbaa9
                     </div>
                 </div>
                 <div class="col-md-2">
@@ -129,3 +137,7 @@ try {
     <script src="js/adaugare_norme.js"></script>
 </body>
 </html> 
+<<<<<<< HEAD
+=======
+</html> 
+>>>>>>> 6dbdec9cd26658aa17bf66070ebef1653f2dbaa9

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 [03-Jun-2025 14:42:58 Europe/Berlin] PHP Warning:  Cannot modify header information - headers already sent by (output started at C:\xampp\htdocs\SoftAdmin\index.php:183) in C:\xampp\htdocs\SoftAdmin\config.php on line 22
 [03-Jun-2025 14:42:58 Europe/Berlin] PHP Warning:  Cannot modify header information - headers already sent by (output started at C:\xampp\htdocs\SoftAdmin\index.php:183) in C:\xampp\htdocs\SoftAdmin\config.php on line 23
 [03-Jun-2025 14:42:58 Europe/Berlin] PHP Warning:  Cannot modify header information - headers already sent by (output started at C:\xampp\htdocs\SoftAdmin\index.php:183) in C:\xampp\htdocs\SoftAdmin\config.php on line 24
@@ -1660,3 +1661,5 @@ Stack trace:
 [04-Jun-2025 14:50:47 Europe/Berlin] PHP Warning:  Cannot modify header information - headers already sent by (output started at C:\xampp\htdocs\SoftAdmin\config.php:53) in C:\xampp\htdocs\SoftAdmin\api\verifica_resurse.php on line 4
 [04-Jun-2025 14:51:53 Europe/Berlin] PHP Warning:  Cannot modify header information - headers already sent by (output started at C:\xampp\htdocs\SoftAdmin\config.php:53) in C:\xampp\htdocs\SoftAdmin\api\verifica_resurse.php on line 4
 [04-Jun-2025 14:54:08 Europe/Berlin] PHP Warning:  Cannot modify header information - headers already sent by (output started at C:\xampp\htdocs\SoftAdmin\config.php:53) in C:\xampp\htdocs\SoftAdmin\api\verifica_resurse.php on line 4
+=======
+>>>>>>> 6dbdec9cd26658aa17bf66070ebef1653f2dbaa9

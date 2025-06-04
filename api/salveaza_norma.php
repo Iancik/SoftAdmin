@@ -21,8 +21,11 @@ try {
         throw new Exception('Date invalide primite');
     }
 
+<<<<<<< HEAD
     error_log('Date decodate: ' . print_r($data, true));
 
+=======
+>>>>>>> 6dbdec9cd26658aa17bf66070ebef1653f2dbaa9
     // Validate required fields
     $requiredFields = ['codVarianta', 'simbol', 'denumire', 'um', 'codArticol', 'codCapitol'];
     foreach ($requiredFields as $field) {
@@ -31,6 +34,7 @@ try {
         }
     }
 
+<<<<<<< HEAD
     // Start transaction
     $pdo->beginTransaction();
     error_log('Tranzacție începută');
@@ -55,6 +59,13 @@ try {
     if ($stmt->fetchColumn() == 0) {
         throw new Exception('Capitolul specificat nu există în baza de date');
     }
+=======
+    // Log received data
+    error_log('Date primite: ' . print_r($data, true));
+
+    // Start transaction
+    $pdo->beginTransaction();
+>>>>>>> 6dbdec9cd26658aa17bf66070ebef1653f2dbaa9
 
     // Insert into ArticoleVariante
     $stmt = $pdo->prepare("INSERT INTO ArticoleVariante (codVarianta, Simbol, Denumire, Um, codArticol, codCapitol, Data) 
@@ -72,6 +83,7 @@ try {
     
     error_log('Parametri pentru ArticoleVariante: ' . print_r($params, true));
     
+<<<<<<< HEAD
     try {
         $result = $stmt->execute($params);
         if (!$result) {
@@ -82,6 +94,12 @@ try {
     } catch (PDOException $e) {
         error_log('Eroare PDO la inserarea în ArticoleVariante: ' . $e->getMessage());
         throw new Exception('Eroare la inserarea în ArticoleVariante: ' . $e->getMessage());
+=======
+    $result = $stmt->execute($params);
+    if (!$result) {
+        error_log('Eroare la inserarea în ArticoleVariante: ' . print_r($stmt->errorInfo(), true));
+        throw new Exception('Eroare la inserarea în ArticoleVariante: ' . implode(', ', $stmt->errorInfo()));
+>>>>>>> 6dbdec9cd26658aa17bf66070ebef1653f2dbaa9
     }
 
     // Log resources
@@ -102,22 +120,32 @@ try {
                 case 'manopera':
                     $table = 'Link_Variante_Manopera';
                     $codField = 'codManopera';
+<<<<<<< HEAD
                     $checkTable = 'manopera';
+=======
+>>>>>>> 6dbdec9cd26658aa17bf66070ebef1653f2dbaa9
                     break;
                 case 'material':
                     $table = 'Link_Variante_Material';
                     $codField = 'CodMaterial';
+<<<<<<< HEAD
                     $checkTable = 'materialtehnologic';
+=======
+>>>>>>> 6dbdec9cd26658aa17bf66070ebef1653f2dbaa9
                     break;
                 case 'utilaj':
                     $table = 'Link_Variante_Utilaj';
                     $codField = 'codUtilaj';
+<<<<<<< HEAD
                     $checkTable = 'utilaj';
+=======
+>>>>>>> 6dbdec9cd26658aa17bf66070ebef1653f2dbaa9
                     break;
                 default:
                     throw new Exception('Tip de resursă invalid: ' . $resursa['tip']);
             }
 
+<<<<<<< HEAD
             error_log("Verificare resursă în tabela $checkTable cu codul {$resursa['id']}");
 
             // Verifică dacă resursa există în tabela corespunzătoare
@@ -127,6 +155,8 @@ try {
                 throw new Exception("Resursa de tip {$resursa['tip']} cu codul {$resursa['id']} nu există în baza de date");
             }
 
+=======
+>>>>>>> 6dbdec9cd26658aa17bf66070ebef1653f2dbaa9
             // Prepare SQL with correct field names
             $sql = "INSERT INTO $table (codVarianta, $codField, Pozitie, Cantitate) 
                     VALUES (:codVarianta, :codResursa, :pozitie, :cantitate)";
@@ -169,11 +199,18 @@ try {
     // Rollback transaction on error
     if ($pdo->inTransaction()) {
         $pdo->rollBack();
+<<<<<<< HEAD
         error_log('Tranzacție anulată din cauza erorii: ' . $e->getMessage());
     }
     
     error_log('Eroare la salvarea normei: ' . $e->getMessage());
     error_log('Stack trace: ' . $e->getTraceAsString());
+=======
+        error_log('Tranzacție anulată din cauza erorii');
+    }
+    
+    error_log('Eroare la salvarea normei: ' . $e->getMessage());
+>>>>>>> 6dbdec9cd26658aa17bf66070ebef1653f2dbaa9
     http_response_code(500);
     echo json_encode([
         'success' => false,

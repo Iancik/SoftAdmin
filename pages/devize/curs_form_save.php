@@ -1,10 +1,15 @@
 <?php
+<<<<<<< HEAD
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 require_once __DIR__ . '/../../config.php';
 
 header('Content-Type: application/json');
 
+=======
+require_once __DIR__ . '/../../config.php';
+
+>>>>>>> 6dbdec9cd26658aa17bf66070ebef1653f2dbaa9
 error_log('--- INTRARE curs_form_save.php ---');
 error_log('POST primit: ' . print_r($_POST, true));
 
@@ -18,6 +23,7 @@ function convertRomanianChars($text) {
     return str_replace(array_keys($replacements), array_values($replacements), $text);
 }
 
+<<<<<<< HEAD
 try {
     // Conectare la baza de date principală
     $pdo_main = new PDO(
@@ -67,6 +73,43 @@ try {
         
         error_log("Variabile procesate: Data=$data, Localitate=$localitate, Judet=$judet, TipEveniment=$tip_eveniment, Locatia=$locatia, Ora=$ora, Poza=$poza, Vizibil=$vizibil");
 
+=======
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    error_log('--- START curs_form_save.php ---');
+    error_log('POST primit: ' . print_r($_POST, true));
+
+    // Validare date de intrare
+    $required_fields = ['Localitate', 'Judet', 'Data', 'TipEveniment', 'Locatia', 'Ora'];
+    $errors = [];
+    
+    foreach ($required_fields as $field) {
+        if (empty($_POST[$field])) {
+            $errors[] = "Câmpul {$field} este obligatoriu";
+            error_log("Eroare validare: Câmpul {$field} este gol");
+        }
+    }
+
+    if (!empty($errors)) {
+        error_log('Erori de validare: ' . implode(', ', $errors));
+        $_SESSION['form_errors'] = $errors;
+        header('Location: /SoftAdmin/index.php?action=curs_form&error=validation');
+        exit;
+    }
+
+    $data = $_POST['Data'];
+    $localitate = $_POST['Localitate'];
+    $judet = $_POST['Judet'];
+    $tip_eveniment = $_POST['TipEveniment'];
+    $locatia = $_POST['Locatia'];
+    $ora = $_POST['Ora'];
+    $poza = $_POST['Poza'] ?? '';
+    $detalii = convertRomanianChars($_POST['Detalii'] ?? '');
+    $vizibil = isset($_POST['vizibil']) ? 1 : 0;
+    
+    error_log("Variabile procesate: Data=$data, Localitate=$localitate, Judet=$judet, TipEveniment=$tip_eveniment, Locatia=$locatia, Ora=$ora, Poza=$poza, Vizibil=$vizibil");
+
+    try {
+>>>>>>> 6dbdec9cd26658aa17bf66070ebef1653f2dbaa9
         error_log('Valoare cod primită: ' . var_export($_POST['cod'], true));
         
         if (isset($_POST['cod']) && is_numeric($_POST['cod']) && intval($_POST['cod']) > 0) {
@@ -106,6 +149,7 @@ try {
             error_log('INSERT executat cu succes');
         }
         
+<<<<<<< HEAD
         echo json_encode([
             'success' => true,
             'message' => isset($_POST['cod']) ? 'Evenimentul a fost actualizat cu succes' : 'Evenimentul a fost adăugat cu succes'
@@ -127,3 +171,21 @@ try {
     ]);
     exit;
 } 
+=======
+        $_SESSION['success_message'] = isset($_POST['cod']) ? 'Evenimentul a fost actualizat cu succes' : 'Evenimentul a fost adăugat cu succes';
+        error_log('Redirectionare spre /SoftAdmin/index.php?action=cursuri');
+        header("Location: /SoftAdmin/index.php?action=cursuri");
+        exit;
+        
+    } catch (Exception $e) {
+        error_log('Eroare la query: ' . $e->getMessage());
+        $_SESSION['error_message'] = $e->getMessage();
+        header('Location: /SoftAdmin/index.php?action=curs_form' . (isset($_POST['cod']) ? '&cod=' . $_POST['cod'] : '') . '&error=1');
+        exit;
+    }
+}
+
+error_log('Redirectionare fallback spre /SoftAdmin/index.php?action=cursuri');
+header('Location: /SoftAdmin/index.php?action=cursuri');
+exit; 
+>>>>>>> 6dbdec9cd26658aa17bf66070ebef1653f2dbaa9

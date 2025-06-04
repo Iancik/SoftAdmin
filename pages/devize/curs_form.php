@@ -105,7 +105,11 @@ error_log('Afișare formular curs_form.php');
             <?php unset($_SESSION['success_message']); ?>
         <?php endif; ?>
         
+<<<<<<< HEAD
         <form method="POST" action="/SoftAdmin/pages/devize/curs_form_save.php" class="needs-validation" id="cursForm" novalidate>
+=======
+        <form method="POST" action="pages/devize/curs_form_save.php" class="needs-validation" novalidate>
+>>>>>>> 6dbdec9cd26658aa17bf66070ebef1653f2dbaa9
             <input type="hidden" name="cod" value="<?= htmlspecialchars($curs['codCalendar']) ?>">
             
             <div class="row">
@@ -169,19 +173,26 @@ error_log('Afișare formular curs_form.php');
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
     // Inițializare CKEditor
+<<<<<<< HEAD
     let editor;
+=======
+>>>>>>> 6dbdec9cd26658aa17bf66070ebef1653f2dbaa9
     ClassicEditor
         .create(document.querySelector('#Detalii'), {
             toolbar: ['heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', '|', 'undo', 'redo'],
             language: 'ro'
         })
+<<<<<<< HEAD
         .then(newEditor => {
             editor = newEditor;
         })
+=======
+>>>>>>> 6dbdec9cd26658aa17bf66070ebef1653f2dbaa9
         .catch(error => {
             console.error(error);
         });
 
+<<<<<<< HEAD
     // Validare și trimitere formular
     document.getElementById('cursForm').addEventListener('submit', function(event) {
         event.preventDefault();
@@ -219,6 +230,22 @@ error_log('Afișare formular curs_form.php');
             alert('A apărut o eroare la salvare: ' + error.message);
         });
     });
+=======
+    // Validare formular
+    (function () {
+        'use strict'
+        var forms = document.querySelectorAll('.needs-validation')
+        Array.prototype.slice.call(forms).forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+                form.classList.add('was-validated')
+            }, false)
+        })
+    })()
+>>>>>>> 6dbdec9cd26658aa17bf66070ebef1653f2dbaa9
     </script>
 </body>
 </html> 

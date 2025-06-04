@@ -1,4 +1,5 @@
 $(document).ready(function() {
+<<<<<<< HEAD
     // Get the next variant code when page loads
     console.log('Încărcare pagină - se obține următorul cod variantă...');
     
@@ -26,6 +27,8 @@ $(document).ready(function() {
         }
     });
 
+=======
+>>>>>>> 6dbdec9cd26658aa17bf66070ebef1653f2dbaa9
     // Initialize Select2 for capitol search
     $('#codCapitol').select2({
         placeholder: 'Căutați un capitol...',
@@ -261,6 +264,7 @@ $(document).ready(function() {
             success: function(response) {
                 console.log('Răspuns server:', response);
                 if (response.success) {
+<<<<<<< HEAD
                     // După salvarea cu succes, încărcăm resursele
                     $.ajax({
                         url: 'api/incarca_resurse.php',
@@ -302,6 +306,10 @@ $(document).ready(function() {
                             alert('Norma a fost salvată, dar a apărut o eroare la încărcarea resurselor.');
                         }
                     });
+=======
+                    alert('Norma a fost salvată cu succes!');
+                    window.location.reload();
+>>>>>>> 6dbdec9cd26658aa17bf66070ebef1653f2dbaa9
                 } else {
                     alert('Eroare la salvarea normei: ' + response.message);
                 }

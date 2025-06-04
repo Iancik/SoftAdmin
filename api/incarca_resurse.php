@@ -3,15 +3,26 @@ require_once '../config.php';
 
 header('Content-Type: application/json');
 
+<<<<<<< HEAD
 if (!isset($_GET['codVarianta'])) {
     echo json_encode([
         'success' => false,
         'message' => 'Codul variantei este obligatoriu'
+=======
+if (!isset($_GET['simbol'])) {
+    echo json_encode([
+        'success' => false,
+        'message' => 'Simbolul normei este obligatoriu'
+>>>>>>> 6dbdec9cd26658aa17bf66070ebef1653f2dbaa9
     ]);
     exit;
 }
 
+<<<<<<< HEAD
 $codVarianta = $_GET['codVarianta'];
+=======
+$simbol = $_GET['simbol'];
+>>>>>>> 6dbdec9cd26658aa17bf66070ebef1653f2dbaa9
 
 try {
     $resurse = [];
@@ -24,7 +35,11 @@ try {
         WHERE lvm.codVarianta = ?
         ORDER BY lvm.Pozitie
     ");
+<<<<<<< HEAD
     $stmt->execute([$codVarianta]);
+=======
+    $stmt->execute([$simbol]);
+>>>>>>> 6dbdec9cd26658aa17bf66070ebef1653f2dbaa9
     while ($row = $stmt->fetch()) {
         $row['tip'] = 'manopera';
         $resurse[] = $row;
@@ -38,7 +53,11 @@ try {
         WHERE lvm.codVarianta = ?
         ORDER BY lvm.Pozitie
     ");
+<<<<<<< HEAD
     $stmt->execute([$codVarianta]);
+=======
+    $stmt->execute([$simbol]);
+>>>>>>> 6dbdec9cd26658aa17bf66070ebef1653f2dbaa9
     while ($row = $stmt->fetch()) {
         $row['tip'] = 'material';
         $resurse[] = $row;
@@ -52,7 +71,11 @@ try {
         WHERE lvu.codVarianta = ?
         ORDER BY lvu.Pozitie
     ");
+<<<<<<< HEAD
     $stmt->execute([$codVarianta]);
+=======
+    $stmt->execute([$simbol]);
+>>>>>>> 6dbdec9cd26658aa17bf66070ebef1653f2dbaa9
     while ($row = $stmt->fetch()) {
         $row['tip'] = 'utilaj';
         $resurse[] = $row;

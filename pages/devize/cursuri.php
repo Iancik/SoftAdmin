@@ -146,6 +146,7 @@ error_log('Evenimente obținute: ' . count($evenimente));
             cancelButtonText: 'Anulează'
         }).then((result) => {
             if (result.isConfirmed) {
+<<<<<<< HEAD
                 const formData = new FormData();
                 formData.append('cod', cod);
                 
@@ -184,6 +185,10 @@ error_log('Evenimente obținute: ' . count($evenimente));
                         icon: 'error'
                     });
                 });
+=======
+                document.getElementById('deleteCod').value = cod;
+                document.getElementById('deleteForm').submit();
+>>>>>>> 6dbdec9cd26658aa17bf66070ebef1653f2dbaa9
             }
         });
     }
