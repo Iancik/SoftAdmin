@@ -1,1 +1,0 @@
-<h2>Editare resurse</h2> 
