@@ -1,9 +1,11 @@
 <?php
+// Configurare baza de date - EXEMPLU
+// Copiază acest fișier ca database.php și completează cu datele tale
 try {
-    $host = 'devize.md';
-    $dbname = 'norme_moldova';
-    $username = 'norme_moldova';
-    $password = 'norme_moldova_2014';
+    $host = 'your_host_here';
+    $dbname = 'your_database_name';
+    $username = 'your_username';
+    $password = 'your_password';
     $charset = 'utf8';
 
     $dsn = "mysql:host=$host;dbname=$dbname;charset=$charset";
@@ -23,4 +25,5 @@ try {
         'message' => 'Eroare la conectarea la baza de date. Vă rugăm contactați administratorul.'
     ]);
     exit;
-} 
+}
+?> 

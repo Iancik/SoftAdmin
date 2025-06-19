@@ -1,1 +1,36 @@
+# Configurări baza de date 
 config.php
+config/database.php
+includes/config.php
+
+# Fișiere de log
+*.log
+error.log
+
+# Fișiere temporare
+*.tmp
+*.temp
+
+# Fișiere de backup
+*.bak
+*.backup
+
+# Fișiere de configurare sensibile
+.env
+.env.local
+.env.production
+
+# Fișiere de sistem
+.DS_Store
+Thumbs.db
+
+# Directoare de cache
+cache/
+tmp/
+temp/
+
+# Fișiere de configurare IDE
+.vscode/
+.idea/
+*.swp
+*.swo

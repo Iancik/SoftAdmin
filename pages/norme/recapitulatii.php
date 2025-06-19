@@ -11,6 +11,10 @@ require_once __DIR__ . '/../../config.php';
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css" rel="stylesheet">
     <style>
+        :root {
+            --accent-color: #37517e;
+            --accent-hover: #2c4064;
+        }
         .recapitulari-container {
             background: #f8f9fa;
             border-radius: 10px;
@@ -18,7 +22,8 @@ require_once __DIR__ . '/../../config.php';
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
         .table th {
-            background-color: #f8f9fa;
+            background-color: var(--accent-color);
+            color: white;
         }
         .editable:hover {
             background-color: #e9ecef;
@@ -27,6 +32,35 @@ require_once __DIR__ . '/../../config.php';
         .alert {
             display: none;
             margin-top: 20px;
+        }
+        .btn-primary {
+            background: var(--accent-color);
+            border: none;
+        }
+        .btn-primary:hover {
+            background: var(--accent-hover);
+        }
+        .modal-header {
+            background: var(--accent-color);
+            color: white;
+        }
+        .modal-header .btn-close {
+            color: white;
+        }
+        .form-control:focus {
+            box-shadow: 0 0 0 0.2rem rgba(55, 81, 126, 0.25);
+            border-color: var(--accent-color);
+        }
+        .page-link, .pagination .page-item.active .page-link {
+            color: var(--accent-color);
+        }
+        .pagination .page-item.active .page-link {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+            color: #fff;
+        }
+        .h4.mb-4, h2.h4 {
+            color: var(--accent-color) !important;
         }
     </style>
 </head>

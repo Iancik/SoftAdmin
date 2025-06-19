@@ -33,6 +33,57 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['search'])) {
     }
 }
 ?>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editare text normă</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        :root {
+            --accent-color: #37517e;
+        }
+        .btn-primary {
+            background: var(--accent-color);
+            border: none;
+            color: #fff;
+        }
+        .btn-primary:hover {
+            background: #22375a;
+            color: #fff;
+        }
+        .text-primary {
+            color: var(--accent-color) !important;
+        }
+        .table-light th, .table-light td {
+            background-color: #e9ecef !important;
+        }
+        .form-label {
+            color: var(--accent-color);
+            font-weight: 500;
+        }
+        .modal-header {
+            background: var(--accent-color);
+            color: #fff;
+        }
+        .modal-header .btn-close {
+            filter: invert(1) grayscale(1) brightness(2);
+        }
+        .modal-title {
+            color: #fff;
+        }
+        .edit-norma {
+            background: var(--accent-color) !important;
+            color: #fff !important;
+            border: none !important;
+            transition: background 0.2s;
+        }
+        .edit-norma:hover, .edit-norma:focus {
+            background: #22375a !important;
+            color: #fff !important;
+        }
+    </style>
+</head>
 <div class="container-fluid py-4">
     <div class="row justify-content-center">
         <div class="col-12 col-xl-10">

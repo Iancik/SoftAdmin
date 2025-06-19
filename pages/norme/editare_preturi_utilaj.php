@@ -124,8 +124,8 @@ function generatePaginationLinks($current_page, $total_pages, $search_term = '')
             margin-bottom: 20px;
         }
         .card-header {
-            background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
-            color: white;
+            background: #37517e;
+            color: #fff;
             border-radius: 15px 15px 0 0 !important;
             padding: 20px;
         }
@@ -139,14 +139,16 @@ function generatePaginationLinks($current_page, $total_pages, $search_term = '')
             box-shadow: 0 0 0 0.2rem rgba(75, 108, 183, 0.25);
         }
         .btn-primary {
-            background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
+            background: #37517e;
             border: none;
             border-radius: 8px;
             padding: 12px 30px;
             font-size: 1.1em;
+            color: #fff;
         }
         .btn-primary:hover {
-            background: linear-gradient(135deg, #182848 0%, #4b6cb7 100%);
+            background: #22375a;
+            color: #fff;
         }
         .alert {
             border-radius: 8px;
@@ -209,17 +211,17 @@ function generatePaginationLinks($current_page, $total_pages, $search_term = '')
             justify-content: center;
         }
         .pagination .page-link {
-            color: #4b6cb7;
+            color: var(--accent-color);
             border: 1px solid #dee2e6;
             padding: 8px 16px;
         }
         .pagination .page-item.active .page-link {
-            background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
-            border-color: #4b6cb7;
+            background: var(--accent-color);
+            border-color: var(--accent-color);
         }
         .pagination .page-link:hover {
             background-color: #f8f9fa;
-            color: #182848;
+            color: #217dbb;
         }
     </style>
 </head>

@@ -98,6 +98,10 @@ function generatePaginationLinks($current_page, $total_pages, $start_date, $end_
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
+        :root {
+            --accent-color: #37517e;
+            --accent-hover: #2c4064;
+        }
         body {
             background-color: #f8f9fa;
         }
@@ -107,8 +111,8 @@ function generatePaginationLinks($current_page, $total_pages, $start_date, $end_
             margin-bottom: 20px;
         }
         .card-header {
-            background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
-            color: white;
+            background: var(--accent-color);
+            color: #fff;
             border-radius: 15px 15px 0 0 !important;
             padding: 20px;
         }
@@ -119,17 +123,19 @@ function generatePaginationLinks($current_page, $total_pages, $start_date, $end_
             font-size: 1.2em;
         }
         .form-control:focus {
-            box-shadow: 0 0 0 0.2rem rgba(75, 108, 183, 0.25);
+            box-shadow: 0 0 0 0.2rem rgba(55, 81, 126, 0.25);
         }
         .btn-primary {
-            background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
+            background: var(--accent-color);
             border: none;
             border-radius: 8px;
             padding: 12px 30px;
             font-size: 1.1em;
+            color: #fff;
         }
         .btn-primary:hover {
-            background: linear-gradient(135deg, #182848 0%, #4b6cb7 100%);
+            background: var(--accent-hover);
+            color: #fff;
         }
         .btn-danger {
             background: linear-gradient(135deg, #dc3545 0%, #a71d2a 100%);
@@ -179,14 +185,25 @@ function generatePaginationLinks($current_page, $total_pages, $start_date, $end_
             z-index: 100;
         }
         .form-check-input:checked {
-            background-color: #dc3545;
-            border-color: #dc3545;
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
         }
         .select-all-container {
             padding: 10px;
             background-color: #f8f9fa;
             border-radius: 8px;
             margin-bottom: 15px;
+        }
+        .pagination .page-item.active .page-link {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+            color: #fff;
+        }
+        .page-link {
+            color: var(--accent-color);
+        }
+        .card-header h2, h2.mb-0 {
+            color: #fff !important;
         }
     </style>
 </head>

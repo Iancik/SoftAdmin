@@ -251,6 +251,8 @@ function showData(category) {
             return response.json();
         })
         .then(data => {
+            console.log('Date primite de la server:', data);
+            
             if (data.error) {
                 throw new Error(data.error);
             }
@@ -259,8 +261,10 @@ function showData(category) {
             tableBody.innerHTML = '';
             
             data.forEach(row => {
+                console.log('Procesare rând:', row);
                 tableBody.innerHTML += `
-                    <tr>
+                    <tr data-cod-varianta="${row.codVarianta || ''}" 
+                        data-cod-item="${row.codItem || ''}">
                         <td>${row.codVarianta || ''}</td>
                         <td>${row.codItem || ''}</td>
                         <td>${row.denumire || ''}</td>
@@ -326,10 +330,15 @@ function saveChanges() {
     const data = Array.from(inputs).map(input => {
         const row = input.closest('tr');
         return {
-            codVarianta: row.cells[0].textContent,
-            codItem: row.cells[1].textContent,
+            codVarianta: row.cells[0].textContent.trim(),
+            codItem: row.cells[1].textContent.trim(),
             cantitate: input.value
         };
+    });
+
+    console.log('Date pentru salvare:', {
+        category: currentCategory,
+        data: data
     });
     
     fetch('pages/norme/saveChanges.php', {
@@ -337,7 +346,10 @@ function saveChanges() {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify({
+            category: currentCategory,
+            data: data
+        })
     })
     .then(response => {
         if (!response.ok) {
@@ -346,15 +358,16 @@ function saveChanges() {
         return response.json();
     })
     .then(data => {
+        console.log('Răspuns server:', data);
         if (data.success) {
-            alert('Modificările au fost salvate cu succes!');
+            alert(data.message || 'Modificările au fost salvate cu succes!');
         } else {
-            throw new Error(data.error || 'Eroare la salvarea modificărilor');
+            throw new Error(data.error || 'A apărut o eroare la salvarea modificărilor!');
         }
     })
     .catch(error => {
         console.error('Eroare:', error);
-        alert(`A apărut o eroare: ${error.message}`);
+        alert(`A apărut o eroare la salvarea modificărilor: ${error.message}`);
     });
 }
 

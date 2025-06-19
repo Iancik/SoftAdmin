@@ -2,15 +2,13 @@
 require_once __DIR__ . '/../config/database.php';
 
 try {
-    $pdo = getConnection();
-    
-    // Get the highest cod_varianta from all three tables
-    $query = "SELECT MAX(cod_varianta) as max_cod FROM (
-        SELECT cod_varianta FROM link_variante_manopera
+    // Get the highest codVarianta from all three tables
+    $query = "SELECT MAX(codVarianta) as max_cod FROM (
+        SELECT codVarianta FROM link_variante_manopera
         UNION ALL
-        SELECT cod_varianta FROM link_variante_utilaj
+        SELECT codVarianta FROM link_variante_utilaj
         UNION ALL
-        SELECT cod_varianta FROM link_variante_material
+        SELECT codVarianta FROM link_variante_material
     ) as combined_tables";
     
     $stmt = $pdo->query($query);
@@ -22,7 +20,7 @@ try {
     }
     
     // Log the result for debugging
-    error_log("Next cod_varianta: " . $nextCod);
+    error_log("Next codVarianta: " . $nextCod);
     
     header('Content-Type: application/json');
     echo json_encode([

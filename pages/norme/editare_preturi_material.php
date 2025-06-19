@@ -115,8 +115,94 @@ function generatePaginationLinks($current_page, $total_pages, $search_term = '')
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #37517e;
+            --success-color: #2ecc71;
+            --warning-color: #f1c40f;
+            --danger-color: #e74c3c;
+            --light-bg: #f8f9fa;
+            --dark-bg: #2c3e50;
+        }
         body {
-            background-color: #f8f9fa;
+            background-color: var(--light-bg);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .page-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+        .page-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--accent-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .page-header h2 {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin: 0;
+        }
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        .btn-primary, .btn-edit {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+            color: #fff;
+        }
+        .btn-primary:hover, .btn-edit:hover {
+            background-color: #217dbb;
+            border-color: #217dbb;
+            color: #fff;
+        }
+        .btn-danger {
+            background-color: var(--danger-color);
+            color: white;
+        }
+        .btn-danger:hover {
+            background-color: #c0392b;
+            color: white;
+        }
+        .alert {
+            border-radius: 10px;
+            border: none;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .alert-success {
+            background-color: var(--success-color);
+            color: white;
+        }
+        .alert-danger {
+            background-color: var(--danger-color);
+            color: white;
+        }
+        .form-label {
+            font-weight: 500;
+            color: var(--primary-color);
+        }
+        .form-control {
+            border-radius: 8px;
+            border: 1px solid #dee2e6;
+            padding: 0.75rem;
+        }
+        .form-control:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.15);
+        }
+        .description-cell {
+            max-width: 500px;
+            overflow-wrap: break-word;
         }
         .card {
             border-radius: 15px;
@@ -124,32 +210,10 @@ function generatePaginationLinks($current_page, $total_pages, $search_term = '')
             margin-bottom: 20px;
         }
         .card-header {
-            background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
-            color: white;
+            background: var(--accent-color);
+            color: #fff;
             border-radius: 15px 15px 0 0 !important;
             padding: 20px;
-        }
-        .form-control {
-            border-radius: 8px;
-            border: 1px solid #ced4da;
-            padding: 10px;
-            font-size: 1.2em;
-        }
-        .form-control:focus {
-            box-shadow: 0 0 0 0.2rem rgba(75, 108, 183, 0.25);
-        }
-        .btn-primary {
-            background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
-            border: none;
-            border-radius: 8px;
-            padding: 12px 30px;
-            font-size: 1.1em;
-        }
-        .btn-primary:hover {
-            background: linear-gradient(135deg, #182848 0%, #4b6cb7 100%);
-        }
-        .alert {
-            border-radius: 8px;
         }
         .search-results {
             margin-top: 20px;
@@ -209,17 +273,17 @@ function generatePaginationLinks($current_page, $total_pages, $search_term = '')
             justify-content: center;
         }
         .pagination .page-link {
-            color: #4b6cb7;
+            color: var(--accent-color);
             border: 1px solid #dee2e6;
             padding: 8px 16px;
         }
         .pagination .page-item.active .page-link {
-            background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
-            border-color: #4b6cb7;
+            background: var(--accent-color);
+            border-color: var(--accent-color);
         }
         .pagination .page-link:hover {
             background-color: #f8f9fa;
-            color: #182848;
+            color: #217dbb;
         }
     </style>
 </head>

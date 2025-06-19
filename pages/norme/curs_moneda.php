@@ -8,104 +8,251 @@ require_once __DIR__ . '/../../config.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestionare Curs Valutar</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        .curs-container {
-            background: #f8f9fa;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #37517e;
+            --success-color: #2ecc71;
+            --warning-color: #f1c40f;
+            --danger-color: #e74c3c;
+            --light-bg: #f8f9fa;
+            --dark-bg: #2c3e50;
         }
+
+        body {
+            background-color: var(--light-bg);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .page-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .page-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--accent-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .page-header h2 {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .curs-container {
+            background: var(--light-bg);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
         .curs-history {
             max-height: 400px;
             overflow-y: auto;
         }
+
         .alert {
-            display: none;
-            margin-top: 20px;
+            border-radius: 10px;
+            border: none;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-top: 1rem;
+        }
+
+        .alert-success {
+            background-color: var(--success-color);
+            color: white;
+        }
+
+        .alert-danger {
+            background-color: var(--danger-color);
+            color: white;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background-color: #217dbb;
+            border-color: #217dbb;
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline-secondary {
+            color: var(--accent-color);
+            border-color: var(--accent-color);
+        }
+
+        .btn-outline-secondary:hover {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        .form-control {
+            border-radius: 8px;
+            border: 1px solid #dee2e6;
+            padding: 0.75rem;
+        }
+
+        .form-control:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.15);
+        }
+
+        .form-label {
+            font-weight: 500;
+            color: var(--primary-color);
+        }
+
+        .table-container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        .table {
+            margin-bottom: 0;
+        }
+
+        .table thead th {
+            background-color: var(--light-bg);
+            color: var(--primary-color);
+            font-weight: 600;
+            border-bottom: 2px solid var(--accent-color);
+            padding: 1rem;
+            text-align: left;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+        }
+
+        .table tbody td {
+            padding: 1rem;
+            vertical-align: middle;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .table tbody tr:hover {
+            background-color: rgba(52, 152, 219, 0.05);
+        }
+
+        .input-group-text {
+            background-color: var(--light-bg);
+            border-color: #dee2e6;
+            color: var(--primary-color);
+        }
+
+        .small-text {
+            color: #6c757d;
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
         }
     </style>
 </head>
 <body>
-    <div class="container py-5">
-        <div class="row justify-content-center">
-            <div class="col-12 col-lg-10">
-                <div class="card shadow-sm border-0">
-                    <div class="card-body p-4">
-                        <h2 class="h4 mb-4 text-primary">
-                            <i class="bi bi-currency-exchange me-2"></i>Gestionare Curs Valutar
-                        </h2>
+    <div class="page-container">
+        <div class="page-header">
+            <h2>
+                <i class="fas fa-exchange-alt me-2"></i>
+                Gestionare Curs Valutar
+            </h2>
+        </div>
 
-                        <!-- Formular Adăugare Curs -->
-                        <div class="curs-container mb-4">
-                            <form id="cursForm" onsubmit="return addCurs(event)">
-                                <div class="row g-3">
-                                    <div class="col-md-4">
-                                        <label class="form-label">Cod Curs</label>
-                                        <input type="text" class="form-control" id="codCurs" readonly>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label class="form-label">Curs Euro</label>
-                                        <div class="input-group">
-                                            <input type="number" class="form-control" id="cursEuro" 
-                                                   step="0.0001" min="0" required>
-                                            <span class="input-group-text">EUR</span>
-                                            <button type="button" class="btn btn-outline-secondary" onclick="getRealTimeRate()">
-                                                <i class="bi bi-arrow-clockwise"></i>
-                                            </button>
-                                        </div>
-                                        <small class="text-muted" id="lastUpdate"></small>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label class="form-label">Data</label>
-                                        <input type="date" class="form-control" id="dataCurs" readonly>
-                                    </div>
-                                </div>
-                                <div class="mt-3">
-                                    <button type="submit" class="btn btn-primary">
-                                        <i class="bi bi-plus-circle me-2"></i>Adaugă Curs
-                                    </button>
-                                </div>
-                            </form>
+        <!-- Formular Adăugare Curs -->
+        <div class="curs-container">
+            <form id="cursForm" onsubmit="return addCurs(event)">
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <label class="form-label">
+                            <i class="fas fa-hashtag me-2"></i>
+                            Cod Curs
+                        </label>
+                        <input type="text" class="form-control" id="codCurs" readonly>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">
+                            <i class="fas fa-euro-sign me-2"></i>
+                            Curs Euro
+                        </label>
+                        <div class="input-group">
+                            <input type="number" class="form-control" id="cursEuro" 
+                                   step="0.0001" min="0" required>
+                            <span class="input-group-text">EUR</span>
+                            <button type="button" class="btn btn-outline-secondary" onclick="getRealTimeRate()">
+                                <i class="fas fa-sync-alt"></i>
+                            </button>
                         </div>
-
-                        <!-- Istoric Cursuri -->
-                        <div class="card">
-                            <div class="card-header bg-white">
-                                <h5 class="card-title mb-0">Istoric Cursuri</h5>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive curs-history">
-                                    <table class="table table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th>Cod Curs</th>
-                                                <th>Curs Euro</th>
-                                                <th>Data</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="cursHistory">
-                                            <!-- Istoricul va fi încărcat aici -->
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Alert Messages -->
-                        <div id="successAlert" class="alert alert-success alert-dismissible fade show" role="alert">
-                            <i class="bi bi-check-circle me-2"></i>
-                            <span id="successMessage"></span>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                        <div id="errorAlert" class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <i class="bi bi-exclamation-circle me-2"></i>
-                            <span id="errorMessage"></span>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
+                        <small class="text-muted" id="lastUpdate"></small>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">
+                            <i class="fas fa-calendar me-2"></i>
+                            Data
+                        </label>
+                        <input type="date" class="form-control" id="dataCurs" readonly>
                     </div>
                 </div>
+                <div class="mt-3">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-plus-circle me-2"></i>
+                        Adaugă Curs
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Istoric Cursuri -->
+        <div class="table-container">
+            <div class="table-responsive curs-history">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Cod Curs</th>
+                            <th>Curs Euro</th>
+                            <th>Data</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cursHistory">
+                        <!-- Istoricul va fi încărcat aici -->
+                    </tbody>
+                </table>
             </div>
+        </div>
+
+        <!-- Alert Messages -->
+        <div id="successAlert" class="alert alert-success alert-dismissible fade show" role="alert" style="display: none;">
+            <i class="fas fa-check-circle me-2"></i>
+            <span id="successMessage"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <div id="errorAlert" class="alert alert-danger alert-dismissible fade show" role="alert" style="display: none;">
+            <i class="fas fa-exclamation-circle me-2"></i>
+            <span id="errorMessage"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     </div>
 
@@ -206,9 +353,15 @@ require_once __DIR__ . '/../../config.php';
 
         function showError(message) {
             const alert = document.getElementById('errorAlert');
-            document.getElementById('errorMessage').textContent = message;
-            alert.style.display = 'block';
-            setTimeout(() => alert.style.display = 'none', 5000);
+            const msgSpan = document.getElementById('errorMessage');
+            if (alert && msgSpan) {
+                msgSpan.textContent = message;
+                alert.style.display = 'block';
+                if (alert.hideTimeout) clearTimeout(alert.hideTimeout);
+                alert.hideTimeout = setTimeout(() => alert.style.display = 'none', 5000);
+            } else {
+                window.alert('Eroare: ' + message);
+            }
         }
 
         function getRealTimeRate() {

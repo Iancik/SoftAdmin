@@ -1,0 +1,5 @@
+# Blochează accesul direct la fișierele PHP din acest director
+<Files "*.php">
+    Order Deny,Allow
+    Deny from all
+</Files> 

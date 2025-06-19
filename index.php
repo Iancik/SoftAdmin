@@ -1,9 +1,11 @@
 <?php
-// require_once 'auth.php';
-// require_login();
+require_once 'includes/config.php';
+require_once 'includes/auth.php';
+
+// Verificăm dacă utilizatorul este autentificat
+requireLogin();
 
 // Listele bazelor de date
-session_start();
 $dbs = [
     'devize' => 'Devize',
     'site_content' => 'Site Content'
@@ -70,13 +72,14 @@ $action = is_string($_GET['action'] ?? '') ? ($_GET['action'] ?? '') : '';
 
 // Liste acțiuni pentru devize și norme
 $devize_actions = [
-    'cursuri', 'noutati', 'preturi', 'asistenta', 'contacte', 'dashboard', 'setari', 'utilizatori', 'curs_form'
+    'cursuri', 'noutati', 'preturi', 'asistenta', 'contacte', 'dashboard', 'setari', 'utilizatori', 
+    'curs_form', 'noutati_form', 'noutati_delete'
 ];
 $norme_actions = [
     'editare_norme', 'editare_text_norma', 'editare_res', 'adaugare_norme', 'stergere_norme',
     'editare_preturi', 'editare_preturi_material', 'editare_preturi_manopera', 'editare_preturi_utilaj',
     'furnizori', 'furnizori_stergere',
-    'recapitulatii', 'curs_moneda', 'adauga_specificatii'
+    'recapitulatii', 'curs_moneda', 'adauga_specificatii', 'specificatii_form', 'specificatii_form_save'
 ];
 ?>
 <!DOCTYPE html>
@@ -103,6 +106,27 @@ $norme_actions = [
         .sidebar-wp .norme-list .dropdown-norme .norme-link { font-size: 0.98rem; }
         .admin-header { background: #fff; border-bottom: 1px solid #e3e6ea; height: 56px; display: flex; align-items: center; justify-content: flex-end; padding: 0 32px; }
         .admin-header .user-info { font-weight: 500; }
+        .admin-header .user-info .dropdown-toggle {
+            color: #23282d;
+            font-size: 1.1rem;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+        .admin-header .user-info .dropdown-toggle:hover {
+            background-color: #f4f6f8;
+        }
+        .admin-header .user-info .dropdown-menu {
+            border: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .admin-header .user-info .dropdown-item {
+            padding: 8px 16px;
+            color: #23282d;
+        }
+        .admin-header .user-info .dropdown-item:hover {
+            background-color: #f4f6f8;
+        }
         .main-content-wp { padding: 32px 40px; }
         .main-content-wp .page-title { font-size: 2rem; font-weight: 600; margin-bottom: 24px; }
         .main-content-wp .table thead { background: #f8fafb; }
@@ -189,8 +213,14 @@ $norme_actions = [
     <!-- Main -->
     <div class="flex-grow-1">
         <div class="admin-header">
-            <div class="user-info">
-                <i class="bi bi-person-circle me-2"></i> Admin
+            <div class="user-info dropdown">
+                <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-person-circle me-2"></i>
+                    <span><?php echo htmlspecialchars($_SESSION['admin_username']); ?></span>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                    <li><a class="dropdown-item" href="logout.php"><i class="bi bi-box-arrow-right me-2"></i>Deconectare</a></li>
+                </ul>
             </div>
         </div>
         <div class="main-content-wp">
@@ -201,14 +231,35 @@ $norme_actions = [
                     $file = "pages/devize/{$action}.php";
                 } elseif (in_array($action, $norme_actions)) {
                     $file = "pages/norme/{$action}.php";
+                } elseif (in_array($action, ['setari', 'utilizatori'])) {
+                    $file = "pages/{$action}.php";
+                } elseif ($action === 'preturi') {
+                    require_once 'pages/devize/preturi.php';
+                    $file = null;
+                } elseif ($action === 'preturi_form') {
+                    require_once 'pages/devize/preturi_form.php';
+                    $file = null;
+                } elseif ($action === 'preturi_form_save') {
+                    require_once 'pages/devize/preturi_form_save.php';
+                    $file = null;
+                } elseif ($action === 'preturi_delete') {
+                    require_once 'pages/devize/preturi_delete.php';
+                    $file = null;
+                } elseif ($action === 'adauga_specificatii') {
+                    require_once 'pages/norme/specificatii.php';
+                    $file = null;
+                } elseif ($action === 'specificatii_form') {
+                    require_once 'pages/norme/specificatii_form.php';
+                    $file = null;
+                } elseif ($action === 'specificatii_form_save') {
+                    require_once 'pages/norme/specificatii_form_save.php';
+                    $file = null;
                 } else {
                     $file = null;
                 }
                 if ($file && file_exists($file)) {
                     include $file;
-                } else {
-                    echo "<div class='alert alert-warning'>Pagina nu există încă.</div>";
-                }
+                } 
             } else {
                 include 'pages/devize/dashboard.php';
             }
@@ -216,5 +267,6 @@ $norme_actions = [
         </div>
     </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

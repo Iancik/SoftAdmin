@@ -1,0 +1,3 @@
+# Blochează complet accesul direct la toate fișierele din acest director
+Order Deny,Allow
+Deny from all 
